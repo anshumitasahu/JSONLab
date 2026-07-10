@@ -5,11 +5,11 @@ import Formatter from './Components/JSONFormatter';
 
 function App() {
   return (
-    <>
+    <div className="flex flex-col items-center">
       <NavBar />
       <Home />
       <Formatter />
-    </>
+    </div>
   )
 }
 
