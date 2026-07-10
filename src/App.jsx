@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import NavBar from './Components/NavBar';
-// import Home from './Components/Home';
+import Home from './Components/Home';
+import Formatter from './Components/JSONFormatter';
 
 function App() {
   return (
     <>
       <NavBar />
-      {/* <Home /> */}
+      <Home />
+      <Formatter />
     </>
   )
 }
