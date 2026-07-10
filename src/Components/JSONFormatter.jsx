@@ -1,8 +1,8 @@
 import { useState } from "react";
+import Editor from "@monaco-editor/react";
 
 export default function Formatter() {
     const [input, setInput] = useState("");
-    const [output, setOutput] = useState("");
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
 
@@ -18,7 +18,8 @@ export default function Formatter() {
 
             console.log("Formatted:", formattedData);
 
-            setOutput(formattedData);
+            setInput(formattedData);
+            setMessage("JSON formatted successfully.");
 
             setError("");
         }
@@ -26,7 +27,7 @@ export default function Formatter() {
 
             setError("Invalid JSON");
 
-            setOutput("");
+            setInput("");
 
         }
     }
@@ -35,64 +36,101 @@ export default function Formatter() {
         try {
             JSON.parse(input);
 
+            setMessage("✓ Valid JSON");
             setError("");
-            setOutput("Valid JSON");
+        } catch (err) {
+            setError(err.message);
+            setMessage("");
+        }
+    }
 
-        } catch (error) {
-
-            setOutput("");
-            setError("Invalid JSON");
-
+    function minifyJSON() {
+        try {
+            const minified = JSON.stringify(JSON.parse(input));
+            setInput(minified);
+            setMessage("JSON minified.");
+            setError("");
+        } catch (err) {
+            setError(err.message);
         }
     }
 
     function clearJSON() {
         setInput("");
-        setOutput("");
         setError("");
+        setMessage("");
     }
 
     async function copyJSON() {
 
-        if (!output) {
-            console.log("Nothing to copy");
+        if (!input) {
+            setError("Nothing to copy");
             return;
         }
 
-        await navigator.clipboard.writeText(output);
+        await navigator.clipboard.writeText(input);
 
-        console.log("Copied");
+        setMessage("Copied");
+
+        setTimeout(() => {
+            setMessage("");
+        }, 2000);
     }
 
     return (
-        <div className="border border-border max-w-5xl w-4xl h-fit p-8">
+        <div className="border border-border max-w-5xl w-4xl h-fit p-8 rounded-2xl bg-[#0f1117] border border-zinc-800 shadow-xl">
             <div className="mb-3 p-3 text-2xl font-bold text-center">
                 JSON Formatter
             </div>
             <div className="flex flex-col items-center w-full border-t border-t-accent" >
-                <div className="flex flex-col items-center gap-10 mt-10">
+                <div className="flex items-center gap-10 mt-10 items-center justify-center">
                     <div>
-                        <p className="text-sm mb-2">Input:</p>
-                        <textarea name="JSON Frormatter" id="" placeholder="Paste your JSON here... " value={input} onChange={(e) => setInput(e.target.value)} className="outline-0 border border-border w-100 h-60 resize-none p-4 bg-surface-2" />
-                    </div>
-                    <div className="mb-10">
-                        <p className="text-sm mb-2">Output:</p>
-                        <pre className="w-100 border border-border h-fit p-4 bg-surface-2">
-                            {error || message || output}
-                        </pre>
+                        <Editor
+                            width="400px"
+                            height="400px"
+                            language="json"
+                            theme="vs-dark"
+                            value={input}
+                            onChange={(value) => setInput(value || "")}
+                            options={{
+                                minimap: { enabled: false },
+                                fontSize: 15,
+                                fontFamily: "JetBrains Mono, monospace",
+                                automaticLayout: true,
+                                scrollBeyondLastLine: false,
+                                wordWrap: "on",
+                                lineNumbers: "on",
+                                tabSize: 2,
+                                padding: {
+                                    top: 16,
+                                    bottom: 16,
+                                },
+                            }}
+                        />
+
+                        {error && (
+                            <p className="text-error mt-2">{error}</p>
+                        )}
+
+                        {message && (
+                            <p className="text-success mt-2">{message}</p>
+                        )}
                     </div>
                 </div>
-                <div className="flex gap-8">
-                    <button onClick={formatJSON} className="bg-primary p-4 rounded-full font-bold text-lg hover:bg-primary-hover">
+                <div className="flex gap-8 mt-10">
+                    <button onClick={formatJSON} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all">
                         Format
                     </button>
-                    <button onClick={validateJSON} className="bg-primary p-4 rounded-full font-bold text-lg hover:bg-primary-hover">
+                    <button onClick={validateJSON} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all">
                         Validate
                     </button>
-                    <button onClick={clearJSON} className="bg-primary p-4 rounded-full font-bold text-lg hover:bg-primary-hover">
+                    <button onClick={minifyJSON} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all">
+                        Minify
+                    </button>
+                    <button onClick={clearJSON} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all">
                         Clear
                     </button>
-                    <button onClick={copyJSON} className="bg-primary p-4 rounded-full font-bold text-lg hover:bg-primary-hover">
+                    <button onClick={copyJSON} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all">
                         Copy
                     </button>
                 </div>
