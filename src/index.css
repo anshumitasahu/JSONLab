@@ -37,3 +37,16 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.json-theme {
+    --w-rjv-background-color: #1a1a1a;
+
+    --w-rjv-color: #d4d4d4;
+
+    --w-rjv-key-string: #7dd3fc;
+    --w-rjv-type-string-color: #ce9178;
+    --w-rjv-type-int-color: #b5cea8;
+    --w-rjv-type-float-color: #b5cea8;
+    --w-rjv-type-boolean-color: #569cd6;
+    --w-rjv-type-null-color: #c586c0;
+}

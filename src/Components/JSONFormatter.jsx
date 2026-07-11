@@ -89,12 +89,12 @@ export default function Formatter() {
     }
 
     return (
-        <div className="border border-border max-w-5xl w-full h-fit rounded-2xl bg-black flex flex-col items-center">
+        <div className="border border-border max-w-5xl w-full h-fit rounded-2xl bg-tranparent flex flex-col items-center">
             <NavBar />
-            <div className="mb-2 p-2 text-3xl font-bold text-center font-pixel text-primary">
+            <div className="mb-1 p-2 text-3xl font-bold text-center font-pixel text-primary">
                 JSON Formatter
             </div>
-            <div className="mb-2 text-gray-100">
+            <div className="mb-1 text-gray-100">
                 Fast. Secure. Runs entirely in your browser.
             </div>
             <div className="flex flex-col items-center w-full" >
@@ -142,11 +142,11 @@ export default function Formatter() {
                         Tree
                     </span>
                 </div>
-                <div className="flex items-center gap-10 mt-10 justify-center w-[60vw] h-[50vh] bg-[#804d00]/50 border border-border p-4 rounded-lg">
+                <div className="flex items-center gap-10 mt-5 justify-center w-[60vw] h-[40vh] bg-[#1e1e1e] border border-border p-4 rounded-lg">
                     {view === "text" ? (
                         <Editor
                             width="60vw"
-                            height="50vh"
+                            height="40vh"
                             language="json"
                             theme="vs-dark"
                             value={input}
@@ -169,6 +169,7 @@ export default function Formatter() {
                     ) : (parsed && (
                         <JsonView
                             value={parsed}
+                            className="w-[60vw] h-[40vh] overflow-scroll json-theme"
                         />
                     )
                     )}
