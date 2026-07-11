@@ -27,10 +27,6 @@ Visit the live application:
 https://json-lab-inky.vercel.app/
 
 
-## Project Status
-
-🚧 JSONLab is actively under development. Features and improvements will be added over time.
-
 ## Contributing
 
 Suggestions, feedback, and improvements are welcome. Feel free to open an issue or submit a pull request.
