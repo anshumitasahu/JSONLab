@@ -11,6 +11,8 @@ export default function Formatter() {
     const [view, setView] = useState("text");
 
     function formatJSON() {
+        if (view !== "text") return;
+
         try {
             const parsedData = JSON.parse(input);
 
@@ -176,22 +178,23 @@ export default function Formatter() {
 
                 </div>
                 <div className="flex gap-8 mt-5 mb-4">
-                    <button onClick={formatJSON} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all">
+                    <button onClick={formatJSON} disabled={view === "tree"} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all disabled:opacity-80 disabled:cursor-not-allowed disabled:hover:bg-orange-500">
                         Format
                     </button>
-                    <button onClick={validateJSON} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all">
+                    <button onClick={validateJSON} disabled={view === "tree"} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all disabled:opacity-80 disabled:cursor-not-allowed disabled:hover:bg-orange-500">
                         Validate
                     </button>
-                    <button onClick={minifyJSON} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all">
+                    <button onClick={minifyJSON} disabled={view === "tree"} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all disabled:opacity-80 disabled:cursor-not-allowed disabled:hover:bg-orange-500">
                         Minify
                     </button>
                     <button onClick={clearJSON} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all">
                         Clear
                     </button>
-                    <button onClick={copyJSON} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all">
+                    <button onClick={copyJSON} disabled={view === "tree"} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all disabled:opacity-80 disabled:cursor-not-allowed disabled:hover:bg-orange-500">
                         Copy
                     </button>
                 </div>
+
             </div>
         </div >
     )
