@@ -1,32 +1,50 @@
 # JSONLab
 
-A modern developer utility for formatting, validating, and working with JSON data easily.
+A modern JSON formatter and validator built with React. Format, validate, minify, and inspect JSON with a clean developer-focused interface.
 
-## Features
+## ✨ Features
 
-* ⚡ Fast JSON formatting
-* ✅ JSON validation
-* 🎨 Clean developer-focused interface
-* 🌙 Dark mode experience
-* 🔒 Client-side processing for privacy
+- ⚡ Format JSON
+- ✅ Validate JSON
+- 🗜️ Minify JSON
+- 🌳 Tree view for nested JSON
+- 📋 Copy formatted JSON
+- 🌙 Dark UI
+- 🔒 100% client-side processing
 
-## Live Demo
-
-https://json-lab-inky.vercel.app/
-
-## Tech Stack
-
-* React
-* Vite
-* Tailwind CSS
-
-## Installation
-
-Visit the live application:
+## 🚀 Live Demo
 
 https://json-lab-inky.vercel.app/
 
+## 📸 Preview
 
-## Contributing
+<img src="/public/ScreenShot.png">
 
-Suggestions, feedback, and improvements are welcome. Feel free to open an issue or submit a pull request.
+## 🛠 Tech Stack
+
+- React
+- Vite
+- Tailwind CSS
+- Monaco Editor
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/yourusername/jsonlab.git
+cd jsonlab
+bun install
+bun run dev
+```
+
+
+## 🔐 Privacy
+
+All JSON processing happens locally in your browser. No data is uploaded to any server.
+
+## 🤝 Contributing
+
+Issues, feature requests, and pull requests are welcome.
+
+## 📄 License
+
+MIT
