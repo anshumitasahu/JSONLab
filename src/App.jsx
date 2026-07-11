@@ -1,23 +1,12 @@
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NavBar from './Components/NavBar';
-import Home from './Components/Home';
 import Formatter from './Components/JSONFormatter';
 
 function App() {
   return (
-    <div className="font-mono min-h-screen bg-hero bg-[radial-gradient(circle,#f59e0b22_2px,transparent_1px)] [background-size:24px_24px] font-base">
-      <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/JSONFormatter" element={
-            <div className="flex justify-center items-center py-10 w-full">
-              <Formatter />
-            </div>
-          } />
-        </Routes>
-      </BrowserRouter>
+    <div className="min-h-screen bg-black bg-[#090909]
+  bg-[radial-gradient(circle,rgba(255,255,255,0.08)_2px,transparent_2px)]
+  bg-[length:20px_20px] font-base flex flex-col items-center justify-center w-full h-full dot-grid p-10">
+      <Formatter />
     </div>
   )
 }

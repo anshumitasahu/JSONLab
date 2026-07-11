@@ -1,10 +1,14 @@
 import { useState } from "react";
 import Editor from "@monaco-editor/react";
+import NavBar from "./NavBar";
+import JsonView from "@uiw/react-json-view";
+import Switch from "./ToggleSwitch";
 
 export default function Formatter() {
     const [input, setInput] = useState("");
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
+    const [view, setView] = useState("text");
 
     function formatJSON() {
         try {
@@ -26,8 +30,7 @@ export default function Formatter() {
         catch (error) {
 
             setError("Invalid JSON");
-
-            setInput("");
+            setMessage("");
 
         }
     }
@@ -77,14 +80,70 @@ export default function Formatter() {
         }, 2000);
     }
 
+    let parsed = null;
+
+    try {
+        parsed = JSON.parse(input);
+    } catch (err) {
+        parsed = null;
+    }
+
     return (
-        <div className="border border-border max-w-5xl w-full h-fit p-8 rounded-2xl bg-black/50 backdrop-blur-2xl flex flex-col items-center">
-            <div className="mb-3 p-3 text-2xl font-bold text-center">
+        <div className="border border-border max-w-5xl w-full h-fit rounded-2xl bg-black flex flex-col items-center">
+            <NavBar />
+            <div className="mb-2 p-2 text-3xl font-bold text-center font-pixel text-primary">
                 JSON Formatter
             </div>
-            <div className="flex flex-col items-center w-full border-t border-t-accent" >
-                <div className="flex items-center gap-10 mt-10 justify-center">
-                    <div>
+            <div className="mb-2 text-gray-100">
+                Fast. Secure. Runs entirely in your browser.
+            </div>
+            <div className="flex flex-col items-center w-full" >
+                <div className="w-[60vw] text-center mt-2 font-bold mb-3">
+                    {message || error ? (
+                        <p className={error ? "text-error bg-error/10 border border-error p-2 rounded-lg" : "text-success bg-success/10 border-success p-2 rounded-lg"}>
+                            {error || message}
+                        </p>
+                    ) : (
+                        <p className="text-white bg-primary/10 border border-border p-2 rounded-lg">
+                            Format • Validate • Minify
+                        </p>
+                    )}
+                </div>
+                <div className="flex items-center gap-3 mt-4">
+                    <span
+                        className={`transition-colors ${view === "text"
+                            ? "text-primary font-semibold"
+                            : "text-gray-500"
+                            }`}
+                    >
+                        Text
+                    </span>
+
+                    <Switch
+                        checked={view === "tree"}
+                        onChange={(checked) => {
+                            setView(checked ? "tree" : "text");
+
+                            if (checked && !parsed) {
+                                setError("Enter valid JSON to view the tree.");
+                                setMessage("");
+                            } else {
+                                setError("");
+                            }
+                        }}
+                    />
+
+                    <span
+                        className={`transition-colors ${view === "tree"
+                            ? "text-primary font-semibold"
+                            : "text-gray-500"
+                            }`}
+                    >
+                        Tree
+                    </span>
+                </div>
+                <div className="flex items-center gap-10 mt-10 justify-center w-[60vw] h-[50vh] bg-[#804d00]/50 border border-border p-4 rounded-lg">
+                    {view === "text" ? (
                         <Editor
                             width="60vw"
                             height="50vh"
@@ -107,17 +166,15 @@ export default function Formatter() {
                                 },
                             }}
                         />
+                    ) : (parsed && (
+                        <JsonView
+                            value={parsed}
+                        />
+                    )
+                    )}
 
-                        {error && (
-                            <p className="text-error mt-2">{error}</p>
-                        )}
-
-                        {message && (
-                            <p className="text-success mt-2">{message}</p>
-                        )}
-                    </div>
                 </div>
-                <div className="flex gap-8 mt-10">
+                <div className="flex gap-8 mt-5 mb-4">
                     <button onClick={formatJSON} className="bg-primary px-4 py-2 rounded-full font-bold text-lg hover:bg-primary-hover hover:-translate-y-1 transition-all">
                         Format
                     </button>
@@ -135,6 +192,6 @@ export default function Formatter() {
                     </button>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
