@@ -3,7 +3,7 @@
 
 @theme {
     /* Brand */
-    --color-primary: #F59E0B;
+    --color-primary: #ff6f00;
     --color-primary-hover: #D97706;
     --color-accent: #FB923C;
 
@@ -24,16 +24,15 @@
     --color-warning: #FACC15;
     --color-error: #EF4444;
 
-    /* Code Syntax */
-    --color-json-key: #F59E0B;
-    --color-json-string: #22C55E;
-    --color-json-number: #60A5FA;
-    --color-json-boolean: #A78BFA;
-    --color-json-null: #A78BFA;
-
     /* Fonts */
     --font-sans: "Inter", sans-serif;
     --font-mono: "JetBrains Mono", monospace;
-    --font-pixel: "Pixelify Sans", sans-serif;
+    --font-pixel: "Geist Pixel", sans-serif;
     --font-base: "DM Sans", sans-serif;
+}
+
+.bg-hero {
+    background-image: url("/bg1.jpg");
+    background-size: cover;
+    background-position: center;
 }

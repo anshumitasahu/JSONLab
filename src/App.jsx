@@ -6,12 +6,16 @@ import Formatter from './Components/JSONFormatter';
 
 function App() {
   return (
-    <div className="flex flex-col items-center font-mono min-h-screen bg-background bg-[radial-gradient(circle,#f59e0b22_2px,transparent_1px)] [background-size:24px_24px] font-base">
+    <div className="font-mono min-h-screen bg-hero bg-[radial-gradient(circle,#f59e0b22_2px,transparent_1px)] [background-size:24px_24px] font-base">
       <BrowserRouter>
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/JSONFormatter" element={<Formatter />} />
+          <Route path="/JSONFormatter" element={
+            <div className="flex justify-center items-center py-10 w-full">
+              <Formatter />
+            </div>
+          } />
         </Routes>
       </BrowserRouter>
     </div>

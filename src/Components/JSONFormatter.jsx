@@ -78,16 +78,16 @@ export default function Formatter() {
     }
 
     return (
-        <div className="border border-border max-w-5xl w-4xl h-fit p-8 rounded-2xl bg-[#0f1117] border border-zinc-800 shadow-xl">
+        <div className="border border-border max-w-5xl w-full h-fit p-8 rounded-2xl bg-black/50 backdrop-blur-2xl flex flex-col items-center">
             <div className="mb-3 p-3 text-2xl font-bold text-center">
                 JSON Formatter
             </div>
             <div className="flex flex-col items-center w-full border-t border-t-accent" >
-                <div className="flex items-center gap-10 mt-10 items-center justify-center">
+                <div className="flex items-center gap-10 mt-10 justify-center">
                     <div>
                         <Editor
-                            width="400px"
-                            height="400px"
+                            width="60vw"
+                            height="50vh"
                             language="json"
                             theme="vs-dark"
                             value={input}
